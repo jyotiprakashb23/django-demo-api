@@ -80,28 +80,28 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "django-demo",
-#         "USER": "jyotiprakash",
-#         "PASSWORD": "Jyoti@123",
-#         "HOST": "127.0.0.1",
-#         "PORT": "5432",
-#     }
-# }
-
-# Database configuration for Docker environment
 DATABASES = {
-    "default": {
+    'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django_db",
-        "USER": "django_user",
-        "PASSWORD": "django_pass",
-        "HOST": "db",
-        "PORT": 5432,
+        "NAME": "django-demo",
+        "USER": "jyotiprakash",
+        "PASSWORD": "Jyoti@123",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
+
+# Database configuration for Docker environment
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "django_db",
+#         "USER": "django_user",
+#         "PASSWORD": "django_pass",
+#         "HOST": "db",
+#         "PORT": 5432,
+#     }
+# }
 
 
 
