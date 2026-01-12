@@ -38,10 +38,17 @@ POSTGRES_PASSWORD=django_pass
 DATABASE_URL=postgresql://django_user:django_pass@db:5432/django_db
 
 3. Build and Start the Application
-docker-compose up --build
+docker-compose up -d --build
 
-4. Access the Application
-http://localhost:8000
+4. # Run migrations
+docker-compose exed web python manage.py makemigrations
+docker-compose exec web python manage.py migrate
+
+5. # Create superuser for admin access
+docker-compose exec web python manage.py createsuperuser
+
+6. Access the Application
+http://localhost:8000/
 
 
 
