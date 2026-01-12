@@ -11,6 +11,8 @@ services:
       - media_volume:/app/media
     depends_on:
       - db
+    environment:
+      RUNNING_IN_DOCKER: 'true'
     env_file:
       - .env
 

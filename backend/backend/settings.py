@@ -80,28 +80,55 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django-demo",
-        "USER": "jyotiprakash",
-        "PASSWORD": "Jyoti@123",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
-}
+RUNNING_IN_DOCKER = os.environ.get("RUNNING_IN_DOCKER") == 'true'
 
-# Database configuration for Docker environment
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "django_db",
-#         "USER": "django_user",
-#         "PASSWORD": "django_pass",
-#         "HOST": "db",
-#         "PORT": 5432,
+# if RUNNING_IN_DOCKER:  
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": "django_db",
+#             "USER": "django_user",
+#             "PASSWORD": "django_pass",
+#             "HOST": "db",
+#             "PORT": 5432,
+#         }
 #     }
-# }
+    
+# else:
+#     DATABASES = {
+#         'default': {
+#             "ENGINE": "django.db.backends.postgresql",
+#             "NAME": "django-demo",
+#             "USER": "jyotiprakash",
+#             "PASSWORD": "Jyoti@123",
+#             "HOST": "127.0.0.1",
+#             "PORT": "5432",
+#         }
+#     }
+
+if RUNNING_IN_DOCKER:  
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("POSTGRES_DB", "django_db"),
+            "USER": os.environ.get("POSTGRES_USER", "django_user"),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "django_pass"),
+            "HOST": os.environ.get("DATABASE_HOST", "db"),
+            "PORT": os.environ.get("DATABASE_PORT", "5432"),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "django-demo",
+            "USER": "jyotiprakash",
+            "PASSWORD": "Jyoti@123",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
+    }
+
 
 
 

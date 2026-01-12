@@ -11,10 +11,16 @@ class RegisterUserView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
 
+class ListUsersView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
+
 @api_view(['GET'])
 def test_view(request):
     return Response({
-        "register": "/register/",
-        "login": "/login/",
-        "login/refresh": "/login/refresh/",
+        "register": "register/",
+        "login": "login/",
+        "login/refresh": "login/refresh/",
+        "users": "users/"
     })
