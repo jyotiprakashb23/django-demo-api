@@ -1,23 +1,37 @@
 from unicodedata import name
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import RegisterSerializer, LoginSerializer
 from .models import User
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from .permissions import IsStaffPermission
+from .permissions import IsAdmin
 
+# register user api view
 class RegisterUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [IsStaffPermission]
+    permission_classes = [IsAuthenticated, IsAdmin]
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+# list users api view
 class ListUsersView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
+
+# update user api view
+class UpdateUserView(generics.RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    lookup_field = 'pk'
+    # permission_classes = [IsAuthenticated, IsAdmin]
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
 
 # Generate custom token with additional fields
 class GenerateCustomToken(RefreshToken):

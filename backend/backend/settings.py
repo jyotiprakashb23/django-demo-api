@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'recipe',
     'blogs',
     'images',
+    'sales',
 ]
 
 MIDDLEWARE = [

@@ -11,6 +11,7 @@ urlpatterns = [
     # path('api/', include('recipe.urls')),
     path('api/blogs/', include('blogs.urls')),
     path('api/images/', include('images.urls')),
+    path('api/sales/', include('sales.urls')),
 ]
 
 if settings.DEBUG:
